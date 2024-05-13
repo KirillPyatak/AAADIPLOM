@@ -1,0 +1,55 @@
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
+  background-color: #f8f9fa;
+  color: #212529;
+  line-height: 1.5;
+  transition: background-color 0.3s ease; /* Добавляем плавный переход для фона */
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #fff;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  border-radius: 10px; /* Добавляем скругление углов */
+}
+
+h2 {
+  font-weight: 600;
+  color: #6c757d;
+  margin-bottom: 1rem;
+  text-transform: uppercase; /* Делаем текст заглавными буквами */
+}
+
+p {
+  margin-bottom: 1rem;
+  font-size: 0.9em; /* Уменьшаем размер шрифта */
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 1rem;
+  border-radius: 10px; /* Добавляем скругление углов */
+}
+
+.profile-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.profile-info p {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #dee2e6;
+  padding: 0.5rem 0;
+}
+
+.profile-info p:last-child {
+  border-bottom: none;
+}

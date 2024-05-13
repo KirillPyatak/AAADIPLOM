@@ -1,0 +1,71 @@
+/* PublicationList.css */
+
+/* Table styles */
+.PublicationTable {
+  width: 70%; /* Reduce the width of the table */
+  margin: 20px auto; /* Center the table */
+  border-radius: 10px; /* Rounded corners */
+  overflow: hidden; /* Hide overflow to prevent content from leaking out of rounded corners */
+  border: 2px solid #E4E4E7; /* Light gray border around the table */
+}
+
+.PublicationTable th,
+.PublicationTable td {
+  padding: 10px; /* Reduce padding */
+  border-bottom: 1px solid #E4E4E7; /* Light gray border between td elements */
+}
+
+.PublicationTable th:first-child,
+.PublicationTable td:first-child {
+  border-top-left-radius: 10px; /* Rounded corners for the first cell */
+}
+
+.PublicationTable th:last-child,
+.PublicationTable td:last-child {
+  border-top-right-radius: 10px; /* Rounded corners for the last cell */
+}
+
+/* Title styles */
+.PublicationTitle {
+  font-size: 16px; /* Reduce font size */
+  color: #007bff; /* Blue color */
+  text-decoration: none;
+}
+
+.PublicationTitle:hover {
+  text-decoration: underline;
+}
+
+/* Author styles */
+.PublicationAuthor {
+  font-style: italic;
+  color: #6c757d; /* Gray color */
+}
+
+/* Status styles */
+.VerifiedStatus {
+  display: inline-block;
+  padding: 2px 28px; /* Adjust padding */
+  border-radius: 20px; /* Adjust border radius */
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.VerifiedStatus.Yes {
+  background-color: #DCFCE7;
+  color: #14532D; /* Green color for verified status */
+}
+
+.VerifiedStatus.No {
+  background-color: #FEE2E2;
+  color: #7F1D1D; /* Red color for not verified status */
+  padding: 2px 16px; /* Adjust padding to match verified status */
+}
+
+
+
+
+
+/* Border between tbody elements */
+.PublicationTable tbody {
+  border-top: 2px solid #ffffff; /* Light gray border between tbody elements */
+}

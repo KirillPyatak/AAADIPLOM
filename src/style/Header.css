@@ -1,0 +1,76 @@
+/* Header.css */
+
+/* Шапка сайта */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+  transition: all 0.5s ease; /* Добавляем плавный переход для всех свойств */
+}
+
+/* Кнопка меню */
+.menu-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  order: -1;
+}
+
+/* Меню */
+.menu {
+  position: absolute;
+  top: 50px;
+  left: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: none;
+  z-index: 999;
+  transition: all 0.5s ease; /* Добавляем плавный переход для всех свойств */
+}
+
+/* Отображаем меню, когда оно открыто */
+.menu.open {
+  display: block;
+}
+
+/* Стили для пунктов меню */
+.menu ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.menu ul li {
+  padding: 10px;
+  transition: background-color 0.3s ease; /* Добавляем плавный переход для фона */
+}
+
+.menu ul li:hover {
+  background-color: #f0f0f0; /* Добавляем фон при наведении */
+}
+
+.menu ul li a {
+  text-decoration: none;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.menu ul li a:hover {
+  color: #666;
+}
+
+/* Добавим новый класс для скрытия и изменения размера шапки */
+.header.hidden {
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
+}
+
+/* Уменьшим размер шрифта при скрытой шапке */
+.header.hidden .menu-button {
+  font-size: 14px;
+}

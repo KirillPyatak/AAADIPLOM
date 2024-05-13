@@ -1,0 +1,54 @@
+/* PublicationDetails.css */
+
+.publication-details-container {
+  width: 70%; /* Уменьшаем ширину контейнера */
+  margin: 20px auto; /* Центрируем контейнер */
+  border-radius: 10px; /* Скругляем углы контейнера */
+  overflow: hidden; /* Скрываем переполнение */
+  border: 2px solid #E4E4E7; /* Светло-серая граница вокруг контейнера */
+  padding: 20px; /* Добавляем отступы внутри контейнера */
+}
+
+.publication-details-container h2 {
+  font-size: 20px; /* Увеличиваем размер заголовка */
+  color: #007bff; /* Синий цвет заголовка */
+  margin-bottom: 10px; /* Добавляем отступ снизу */
+}
+
+.publication-details-container p {
+  font-size: 16px; /* Размер текста */
+  color: #333; /* Цвет текста */
+  margin-bottom: 10px; /* Отступ снизу */
+}
+
+.publication-details-container .PublicationTitle {
+  font-size: 16px; /* Размер заголовка публикации */
+  color: #007bff; /* Синий цвет заголовка публикации */
+  text-decoration: none; /* Убираем подчеркивание */
+}
+
+.publication-details-container .PublicationTitle:hover {
+  text-decoration: underline; /* Подчеркиваем при наведении */
+}
+
+.publication-details-container .PublicationAuthor {
+  font-style: italic; /* Курсивный шрифт */
+  color: #6c757d; /* Серый цвет */
+}
+
+.publication-details-container .VerifiedStatus {
+  display: inline-block; /* Инлайн-блочный элемент */
+  padding: 2px 16px; /* Отступы */
+  border-radius: 20px; /* Скругляем углы */
+  white-space: nowrap; /* Запрещаем перенос текста */
+}
+
+.publication-details-container .VerifiedStatus.Yes {
+  background-color: #DCFCE7; /* Зеленый цвет фона для подтвержденного статуса */
+  color: #14532D; /* Зеленый цвет текста */
+}
+
+.publication-details-container .VerifiedStatus.No {
+  background-color: #FEE2E2; /* Красный цвет фона для не подтвержденного статуса */
+  color: #7F1D1D; /* Красный цвет текста */
+}
