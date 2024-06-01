@@ -39,7 +39,7 @@ function App() {
   return (
     <Router>
       <div>
-        <Header loggedIn={loggedIn} onLogout={handleLogout} /> {/* Используем компонент Header */}
+        <Header loggedIn={loggedIn} onLogout={handleLogout} setLoggedIn={setLoggedIn} />
         <Routes>
           <Route path="/profile" element={<UserProfilePage />} />
           <Route path="/library" element={<MyLibraryPage />} />
@@ -48,7 +48,7 @@ function App() {
           <Route path="/publication" element={<PublicationListPage/>}/> {/* Это правильный маршрут для PublicationListPage */}
           <Route path="/publication/:publicationId" element={<PublicationDetails />} />
           <Route path="/journal/:journalId" element={<JournalPublicationsPage />} />
-          <Route path="/" element={loggedIn ? <h2>Welcome to the App!</h2> : <LoginPage onLogin={handleLogin} />} />
+          <Route path="/login" element={loggedIn ? <h2>Welcome to the App!</h2> : <LoginPage onLogin={handleLogin} />} />
         </Routes>
 
       </div>

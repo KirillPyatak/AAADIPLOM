@@ -1,33 +1,64 @@
-import React, { useState, useEffect } from 'react';
+// PublicationList.js
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; // Импорт Link из react-router-dom
-import '../style/FilterPanel.css';
+import { Link } from 'react-router-dom';
+import SaveButton from './SaveButton';
 
-function PublicationList({ filterData, searchQuery }) {
+function PublicationList({ filterData, onSave, onUnsave }) {
   const [publications, setPublications] = useState([]);
 
   useEffect(() => {
-    let url = 'http://127.0.0.1:8000/api/v1/PublicationViewSet/';
+    const fetchData = async () => {
+      try {
+        let url = 'http://127.0.0.1:8000/api/v1/PublicationViewSet/';
 
-    // Формируем параметры запроса на основе filterData
-    const params = new URLSearchParams(filterData).toString();
-    if (params) {
-      url += `?${params}`;
-    }
+        const params = new URLSearchParams(filterData).toString();
+        if (params) {
+          url += `?${params}`;
+        }
 
-    // Добавляем параметр поиска, если он не пустой
-    if (searchQuery && params) {
-      url += `&search=${searchQuery}`;
-    } else if (searchQuery) {
-      url += `?search=${searchQuery}`;
-    }
+        const response = await axios.get(url, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        });
 
-    axios.get(url)
-      .then(response => {
         setPublications(response.data);
-      })
-      .catch(error => console.error(error));
-  }, [filterData, searchQuery]);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, [filterData]);
+
+  const handleSave = async (publicationId) => {
+    try {
+      await onSave(publicationId);
+      // Отметить публикацию как сохраненную в локальном состоянии
+      setPublications(prevPublications =>
+        prevPublications.map(pub =>
+          pub.id === publicationId ? { ...pub, is_saved: true } : pub
+        )
+      );
+    } catch (error) {
+      console.error('Failed to save publication:', error);
+    }
+  };
+
+  const handleUnsave = async (publicationId) => {
+    try {
+      await onUnsave(publicationId);
+      // Отметить публикацию как не сохраненную в локальном состоянии
+      setPublications(prevPublications =>
+        prevPublications.map(pub =>
+          pub.id === publicationId ? { ...pub, is_saved: false } : pub
+        )
+      );
+    } catch (error) {
+      console.error('Failed to unsave publication:', error);
+    }
+  };
 
   return (
     <table className="PublicationTable">
@@ -44,7 +75,6 @@ function PublicationList({ filterData, searchQuery }) {
           <tr key={publication.id}>
             <td>{index + 1}</td>
             <td className="PublicationCell">
-              {/* Используем Link вместо тега <a> */}
               <Link to={`/publication/${publication.id}`} className="PublicationTitle">{publication.title}</Link>
               <p>
                 Автор(ы): {publication.authors.map((author, index) => (
@@ -54,7 +84,6 @@ function PublicationList({ filterData, searchQuery }) {
                   </React.Fragment>
                 ))}
               </p>
-
               <p>
                 Журнал(ы): {publication.journal ? (
                   <React.Fragment>
@@ -71,8 +100,6 @@ function PublicationList({ filterData, searchQuery }) {
                   </React.Fragment>
                 ) : null}
               </p>
-
-              <p>{publication.content}</p>
               <p>Types: {publication.types ? publication.types.map(type => type.name).join(', ') : ''}</p>
             </td>
             <td>
@@ -94,7 +121,14 @@ function PublicationList({ filterData, searchQuery }) {
                 </p>
               )}
             </td>
-            <td>{publication.citation_count}</td>
+            <td className="save-button-container">
+              {publication.citation_count}
+              <SaveButton
+                isSaved={publication.is_saved} // Pass is_saved status of the publication
+                onSave={() => handleSave(publication.id)}
+                onUnsave={() => handleUnsave(publication.id)}
+              />
+            </td>
           </tr>
         ))}
       </tbody>

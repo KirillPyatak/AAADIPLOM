@@ -1,54 +1,140 @@
-/* PublicationDetails.css */
-
-.publication-details-container {
-  width: 70%; /* Уменьшаем ширину контейнера */
-  margin: 20px auto; /* Центрируем контейнер */
-  border-radius: 10px; /* Скругляем углы контейнера */
-  overflow: hidden; /* Скрываем переполнение */
-  border: 2px solid #E4E4E7; /* Светло-серая граница вокруг контейнера */
-  padding: 20px; /* Добавляем отступы внутри контейнера */
+/* Общие стили */
+body, html {
+    font-family: Source Sans Pro, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh; /* Используйте vh вместо % для высоты */
+    background: #f9f9f9;
+    color: #333; /* Добавлен цвет текста */
+    line-height: 1.5; /* Увеличен межстрочный интервал */
+}
+body {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: #fff;
 }
 
-.publication-details-container h2 {
-  font-size: 20px; /* Увеличиваем размер заголовка */
-  color: #007bff; /* Синий цвет заголовка */
-  margin-bottom: 10px; /* Добавляем отступ снизу */
+html {
+    font-size: 10px;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.publication-details-container p {
-  font-size: 16px; /* Размер текста */
-  color: #333; /* Цвет текста */
-  margin-bottom: 10px; /* Отступ снизу */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    width: 90%; /* Добавлено ограничение ширины */
+    max-width: 1200px; /* Добавлено ограничение максимальной ширины */
 }
 
-.publication-details-container .PublicationTitle {
-  font-size: 16px; /* Размер заголовка публикации */
-  color: #007bff; /* Синий цвет заголовка публикации */
-  text-decoration: none; /* Убираем подчеркивание */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 930px;
+    margin: 0 auto;
 }
 
-.publication-details-container .PublicationTitle:hover {
-  text-decoration: underline; /* Подчеркиваем при наведении */
+.col-md-5, .col-md-7 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-bottom: 20px;
 }
 
-.publication-details-container .PublicationAuthor {
-  font-style: italic; /* Курсивный шрифт */
-  color: #6c757d; /* Серый цвет */
+.box {
+    position: relative;
+    background: #fff;
+    border-top: 2px solid #c1c1c1;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    width: 100%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
+    padding: 10px; /* Добавлен отступ внутри блока */
 }
 
-.publication-details-container .VerifiedStatus {
-  display: inline-block; /* Инлайн-блочный элемент */
-  padding: 2px 16px; /* Отступы */
-  border-radius: 20px; /* Скругляем углы */
-  white-space: nowrap; /* Запрещаем перенос текста */
+.box-primary {
+    border-top-color: #3c8dbc;
 }
 
-.publication-details-container .VerifiedStatus.Yes {
-  background-color: #DCFCE7; /* Зеленый цвет фона для подтвержденного статуса */
-  color: #14532D; /* Зеленый цвет текста */
+.box .box-body {
+    padding: 10px;
+    border-radius: 3px;
 }
 
-.publication-details-container .VerifiedStatus.No {
-  background-color: #FEE2E2; /* Красный цвет фона для не подтвержденного статуса */
-  color: #7F1D1D; /* Красный цвет текста */
+.table {
+    width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse; /* Удалена лишняя граница */
+}
+
+.table td {
+
+    padding: 5px;
+    border: 1px solid #e5e5e5;
+    vertical-align: top;
+    text-align: left; /* Добавлено выравнивание текста */
+}
+.table th {
+    padding: 5px;
+    border: 1px solid #e5e5e5;
+    vertical-align: center;
+    text-align: left; /* Добавлено выравнивание текста */
+}
+
+.article-output-data {
+    display: block;
+}
+
+.header {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.pub-info {
+    margin-top: 20px;
+}
+
+.entity-view-title {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.entity-type-label {
+    font-size: 14px;
+    color: #777;
+    margin-left: 10px;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+.loading {
+    font-style: italic;
+}
+
+/* Стили для колонок */
+.col-md-7 {
+  flex: 0 0 60%; /* Изначально авто-ширина */
+  order: 1; /* Порядок по умолчанию */
+}
+
+.col-md-5 {
+  flex: 0 0 30%; /* Изначально авто-ширина */
+  order: 2; /* Порядок по умолчанию */
+}
+
+/* Переопределение для экранов шириной до 999px */
+@media (max-width: 999px) {
+  .col-md-7, .col-md-5 {
+    flex: 0 0 100%; /* Полная ширина */
+    order: unset; /* Сброс порядка */
+    margin-bottom: 10px; /* Отступ между колонками */
+  }
 }

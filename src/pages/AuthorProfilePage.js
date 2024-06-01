@@ -1,16 +1,24 @@
 import React from 'react';
-import AuthorProfile from '../components/AuthorProfile';
-import AuthorPublications from '../components/AuthorPublications';
 import { useParams } from 'react-router-dom';
+import { AuthorProfile, AuthorLink, AuthorActivity } from '../components/AuthorProfile';
+import AuthorPublications from '../components/AuthorPublications';
+import '../style/AuthorProfilePage.css';
 
 function AuthorProfilePage() {
   const { authorId } = useParams();
 
   return (
-    <div>
-      <h2>Author Profile</h2>
-      <AuthorProfile authorId={authorId} />
-      <AuthorPublications authorId={authorId} />
+    <div className="author-profile-page">
+      <div className="profile-container">
+        <div className="center-section">
+          <div className="main-info">
+            <AuthorProfile authorId={authorId} />
+              <AuthorActivity authorId={authorId} />
+              <AuthorPublications authorId={authorId} />
+          </div>
+        </div>
+          <AuthorLink authorId={authorId} />
+      </div>
     </div>
   );
 }

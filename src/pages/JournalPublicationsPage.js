@@ -1,51 +1,93 @@
-// JournalPublicationsPage.js
+// PublicationListPage.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom'; // Импорт useParams для получения параметров маршрута
-import PublicationList from '../components/PublicationList'; // Импорт компонента PublicationList
+import PublicationList from '../components/PublicationList';
+import FilterPanel from '../components/FilterPanel';
+import '../style/PublicationListPage.css';
 
-function JournalPublicationsPage() {
-  const { journalId } = useParams(); // Получаем параметр журнала из маршрута
+function PublicationListPage() {
+  const [filterData, setFilterData] = useState({});
+  const [showFilterPanel, setShowFilterPanel] = useState(false);
   const [publications, setPublications] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [savedPublications, setSavedPublications] = useState([]);
+  const isAuthenticated = true; // Предположим, что пользователь аутентифицирован
 
   useEffect(() => {
-    const fetchJournalPublications = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/api/v1/PublicationViewSet/?journal=${journalId}`);
+        let url = 'http://127.0.0.1:8000/api/v1/PublicationViewSet/';
+
+        const params = new URLSearchParams(filterData).toString();
+        if (params) {
+          url += `?${params}`;
+        }
+
+        const response = await axios.get(url, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        });
+
         setPublications(response.data);
-        setLoading(false);
       } catch (error) {
-        setError('Failed to fetch journal publications');
-        setLoading(false);
         console.error(error);
       }
     };
 
-    fetchJournalPublications();
-  }, [journalId]); // Указываем journalId как зависимость, чтобы useEffect вызывался при изменении параметра журнала
+    fetchData();
+  }, [filterData]);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  const savePublication = async (publicationId) => {
+    try {
+      const accessToken = localStorage.getItem('accessToken');
+      if (!accessToken) {
+        window.location.href = '/login'; // Перенаправляем на страницу входа, если пользователь не аутентифицирован
+        return;
+      }
+      // Предполагаем, что запрос к серверу для сохранения публикации возвращает успешный результат
+      // и что сохраненные публикации обновляются на сервере соответствующим образом
+      setSavedPublications([...savedPublications, publicationId]);
+    } catch (error) {
+      console.error('Не удалось сохранить публикацию:', error);
+    }
+  };
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  const unsavePublication = async (publicationId) => {
+    try {
+      const accessToken = localStorage.getItem('accessToken');
+      if (!accessToken) {
+        window.location.href = '/login'; // Перенаправляем на страницу входа, если пользователь не аутентифицирован
+        return;
+      }
+      // Предполагаем, что запрос к серверу для удаления публикации из сохраненных возвращает успешный результат
+      // и что сохраненные публикации обновляются на сервере соответствующим образом
+      setSavedPublications(savedPublications.filter(id => id !== publicationId));
+    } catch (error) {
+      console.error('Не удалось удалить публикацию из сохраненных:', error);
+    }
+  };
 
-return (
-  <div>
-    {publications.length > 0 && publications[0].journal && (
-      <h2>{publications.journal.name}</h2>
-    )}
-    <div>
-      <PublicationList publications={publications} />
+  const handleFilter = (data) => {
+    setFilterData(data);
+  };
+
+  return (
+    <div className="publication-list-page">
+      <div className="filter-panel-container">
+        <button className="filter-toggle" onClick={() => setShowFilterPanel(!showFilterPanel)}>
+          Фильтры
+        </button>
+        {showFilterPanel && <FilterPanel onFilter={handleFilter} />}
+      </div>
+      <PublicationList
+        publications={publications}
+        isAuthenticated={isAuthenticated}
+        savedPublications={savedPublications}
+        onSave={savePublication}
+        onUnsave={unsavePublication}
+      />
     </div>
-  </div>
-);
-
-
+  );
 }
 
-export default JournalPublicationsPage;
+export default PublicationListPage;

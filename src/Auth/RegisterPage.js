@@ -1,6 +1,6 @@
-// RegisterPage.js
 import React, { useState } from 'react';
 import axios from 'axios';
+// import './RegisterPage.css';
 
 function RegisterPage() {
   const [username, setUsername] = useState('');

@@ -1,0 +1,132 @@
+/* General page styling */
+.author-profile-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  background-color: #f9f9f9;
+  font-family: 'Arial', sans-serif;
+}
+
+.profile-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  gap: 20px;
+}
+
+/* Center section styling */
+.center-section {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.main-info, .activity, .publications {
+  width: 100%;
+  background: #ffffff;
+  border-top: 4px solid #3c8dbc; /* Accent color */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* Link section styling */
+.link {
+  width: 300px;
+  background: #ffffff;
+  border-top: 4px solid #3c8dbc; /* Accent color */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-left: 20px; /* Ensures space between the center section and the link section */
+  margin-bottom: 20px;
+}
+
+/* Additional link section styling */
+.link h4 {
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 18px;
+}
+
+.link p {
+  margin: 10px 0;
+  color: #666;
+}
+
+/* Styling for author information */
+.author_info p {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.author_info a {
+  color: #3c8dbc; /* Accent color */
+  text-decoration: none;
+}
+
+.author_info a:hover {
+  text-decoration: underline;
+}
+
+/* Activity section styling */
+.activity h3 {
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 18px;
+}
+
+.activity a {
+  display: block;
+  margin: 10px 0;
+  color: #666;
+  font-size: 16px;
+}
+
+/* Publications section styling */
+.publications table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.publications th, .publications td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.publications th {
+  background-color: #3c8dbc; /* Accent color */
+  color: white;
+}
+
+.publications tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.publications tr:hover {
+  background-color: #ddd;
+}
+
+.publications a {
+  color: #3c8dbc; /* Accent color */
+  text-decoration: none;
+}
+
+.publications a:hover {
+  text-decoration: underline;
+}
+
+/* Save button container styling */
+.save-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
